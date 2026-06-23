@@ -9,21 +9,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
 
   <style>
     :root {
-      --primary: #0f3d5e;
-      --primary-light: #1d6fa5;
-      --primary-soft: #e8f3fb;
-      --dark: #0f172a;
-      --text: #334155;
+      --primary: #2563eb;
+      --primary-dark: #1e3a8a;
+      --primary-soft: #eff6ff;
+      --secondary: #7c3aed;
+      --background: #eef6f8;
+      --card: #ffffff;
+      --card-soft: #f8fafc;
+      --text: #1e293b;
       --muted: #64748b;
       --border: #e2e8f0;
-      --background: #f1f5f9;
-      --white: #ffffff;
+      --shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -32,11 +37,20 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: "Inter", Arial, sans-serif;
-      background: var(--background);
+      min-height: 100vh;
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.12), transparent 30%),
+        var(--background);
       color: var(--text);
       line-height: 1.7;
+      padding: 32px;
     }
 
     a {
@@ -44,562 +58,786 @@
       text-decoration: none;
     }
 
-    .page {
-      max-width: 1100px;
-      margin: 40px auto;
-      background: var(--white);
-      border-radius: 20px;
+    .resume {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
-    }
-
-    .header {
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      color: var(--white);
-      padding: 44px 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 32px;
-      align-items: center;
-    }
-
-    .header h1 {
-      font-size: 34px;
-      line-height: 1.2;
-      font-weight: 800;
-      margin-bottom: 10px;
-      letter-spacing: -0.8px;
-    }
-
-    .headline {
-      font-size: 17px;
-      font-weight: 500;
-      opacity: 0.95;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      padding: 12px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .layout {
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
       display: grid;
       grid-template-columns: 320px 1fr;
-      min-height: 700px;
     }
 
     .sidebar {
-      background: #f8fafc;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
       border-right: 1px solid var(--border);
-      padding: 34px 30px;
+    }
+
+    .profile {
+      padding: 34px 32px 28px;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.16), rgba(124, 58, 237, 0.10)),
+        #ffffff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .avatar {
+      width: 86px;
+      height: 86px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      box-shadow: 0 18px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .profile h1 {
+      font-size: 25px;
+      line-height: 1.18;
+      color: #0f172a;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+    }
+
+    .profile .role-main {
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .quote {
+      position: relative;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 14px 14px 14px 16px;
+      border-radius: var(--radius-sm);
+    }
+
+    .sidebar-content {
+      padding: 28px 32px 34px;
+    }
+
+    .side-section {
+      margin-bottom: 30px;
+    }
+
+    .side-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .side-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: #475569;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 11px;
+      align-items: center;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .contact-item span,
+    .contact-item a {
+      font-size: 13px;
+      color: #334155;
+      font-weight: 600;
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      color: var(--primary);
+    }
+
+    .skills-group {
+      display: grid;
+      gap: 12px;
+    }
+
+    .skill-box {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .skill-box h3 {
+      font-size: 13px;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      font-size: 12px;
+      color: var(--primary-dark);
+      background: var(--primary-soft);
+      border: 1px solid #dbeafe;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 700;
     }
 
     .main {
-      padding: 34px 42px;
+      padding: 42px 54px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 36px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro-eyebrow {
+      color: var(--primary);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .intro h2 {
+      font-size: 36px;
+      line-height: 1.12;
+      letter-spacing: -1.2px;
+      color: #0f172a;
+      max-width: 720px;
+      margin-bottom: 14px;
+    }
+
+    .intro p {
+      max-width: 720px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .location-pill {
+      white-space: nowrap;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
     }
 
     .section {
+      position: relative;
       margin-bottom: 34px;
+      padding-left: 34px;
     }
 
     .section:last-child {
       margin-bottom: 0;
     }
 
-    .section-title {
-      color: var(--primary);
-      font-size: 15px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .section::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 20px;
+      bottom: -34px;
+      width: 1px;
+      background: var(--border);
     }
 
-    .section-title::after {
+    .section:last-child::before {
+      display: none;
+    }
+
+    .section-title {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .section-title::before {
       content: "";
+      position: absolute;
+      left: -30px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 4px solid #dbeafe;
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.08);
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+
+    .section-title .line {
       height: 1px;
       flex: 1;
       background: var(--border);
     }
 
-    .sidebar .section-title::after {
-      display: none;
-    }
-
-    .contact-list {
+    .education-grid {
       display: grid;
-      gap: 14px;
-      font-size: 14px;
-    }
-
-    .contact-item {
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .contact-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .contact-label {
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .contact-item a {
-      color: var(--primary);
-      font-weight: 600;
-      word-break: break-word;
-    }
-
-    .skills {
-      display: grid;
-      gap: 14px;
-    }
-
-    .skill-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-    }
-
-    .skill-card h3 {
-      color: var(--dark);
-      font-size: 14px;
-      margin-bottom: 6px;
-      font-weight: 700;
-    }
-
-    .skill-card p {
-      font-size: 14px;
-      color: var(--text);
-    }
-
-    .education-main {
-      display: grid;
-      gap: 14px;
+      gap: 12px;
     }
 
     .education-card {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
       align-items: center;
-      gap: 18px;
-      padding: 20px 24px;
-      background: #ffffff;
+      background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
     }
 
     .education-card h3 {
-      color: var(--dark);
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
+      font-size: 16px;
+      color: #0f172a;
+      margin-bottom: 3px;
     }
 
     .education-card p {
-      color: var(--muted);
-      font-size: 15px;
-      margin-top: 4px;
-    }
-
-    .education-card span {
-      background: var(--primary-soft);
-      color: var(--primary);
-      border-radius: 999px;
-      padding: 7px 14px;
       font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
+      color: var(--muted);
+      font-weight: 600;
     }
 
-    .timeline {
+    .year {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .experience-list {
       display: grid;
-      gap: 26px;
+      gap: 14px;
     }
 
-    .experience {
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
+    .experience-card {
+      background: var(--card-soft);
+      border: 1px solid #edf2f7;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      transition: 0.2s ease;
+    }
+
+    .experience-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
       background: #ffffff;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
     }
 
     .experience-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 18px;
+      align-items: start;
       margin-bottom: 12px;
     }
 
-    .experience h3 {
-      color: var(--dark);
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-    }
-
-    .role {
-      color: var(--primary-light);
-      font-weight: 700;
-      margin-top: 3px;
-      font-size: 15px;
-    }
-
-    .period {
-      background: var(--primary-soft);
-      color: var(--primary);
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    ul {
-      margin-left: 18px;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    li::marker {
-      color: var(--primary-light);
-    }
-
-    .project-card {
-      background: linear-gradient(180deg, #f8fbfe, #ffffff);
-      border: 1px solid var(--border);
-      border-left: 5px solid var(--primary-light);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-    }
-
-    .project-card h3 {
-      color: var(--dark);
-      font-size: 20px;
-      font-weight: 800;
+    .company h3 {
+      font-size: 17px;
+      color: #0f172a;
       margin-bottom: 4px;
     }
 
-    .project-stack {
-      color: var(--primary-light);
-      font-weight: 700;
-      margin-bottom: 10px;
+    .company p {
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .period {
+      color: var(--primary-dark);
+      background: #eaf4ff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .experience-card ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .experience-card li {
+      position: relative;
+      padding-left: 18px;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    .experience-card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .project-card {
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, 0.10), rgba(124, 58, 237, 0.08)),
+        #ffffff;
+      border: 1px solid #dbeafe;
+      border-radius: 22px;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: start;
+      box-shadow: 0 16px 38px rgba(37, 99, 235, 0.08);
+    }
+
+    .project-card h3 {
+      font-size: 20px;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .project-badge {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .footer {
-      padding: 18px 48px;
-      background: #f8fafc;
+      margin-top: 34px;
+      padding-top: 18px;
       border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: 13px;
-      text-align: center;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    @media (max-width: 900px) {
-      .page {
-        margin: 0;
+    @media (max-width: 980px) {
+      body {
+        padding: 0;
+      }
+
+      .resume {
         border-radius: 0;
-      }
-
-      .header {
-        grid-template-columns: 1fr;
-        padding: 34px 28px;
-      }
-
-      .header h1 {
-        font-size: 28px;
-      }
-
-      .layout {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        border-right: none;
+        border-right: 0;
         border-bottom: 1px solid var(--border);
       }
 
+      .profile,
+      .sidebar-content,
       .main {
-        padding: 30px 24px;
+        padding-left: 26px;
+        padding-right: 26px;
       }
 
-      .experience-header,
-      .education-card {
-        align-items: flex-start;
+      .topbar {
         flex-direction: column;
       }
 
-      .period,
-      .education-card span {
+      .intro h2 {
+        font-size: 30px;
+      }
+
+      .location-pill {
         width: fit-content;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .main {
+        padding-top: 32px;
+      }
+
+      .section {
+        padding-left: 24px;
+      }
+
+      .section-title::before {
+        left: -26px;
+      }
+
+      .education-card,
+      .experience-header,
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .period,
+      .year,
+      .project-badge {
+        width: fit-content;
+      }
+
+      .intro h2 {
+        font-size: 26px;
       }
     }
 
     @media print {
       body {
+        padding: 0;
         background: #ffffff;
       }
 
-      .page {
-        margin: 0;
+      .resume {
         box-shadow: none;
         border-radius: 0;
       }
 
-      .header {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+      .experience-card:hover {
+        transform: none;
+        box-shadow: none;
       }
 
-      .experience,
-      .project-card,
-      .skill-card,
-      .education-card {
-        box-shadow: none;
+      .profile,
+      .project-card {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="page">
-    <header class="header">
-      <div>
+  <main class="resume">
+    <aside class="sidebar">
+      <section class="profile">
+        <div class="avatar">PG</div>
+
         <h1>Pietra Geovanna Macedo Ferreira</h1>
-        <p class="headline">
-          Desenvolvedora Full Stack Júnior | Java, Spring Boot, Kotlin, PHP e Banco de Dados
+
+        <p class="role-main">
+          Desenvolvedora Full Stack Júnior
         </p>
-      </div>
 
-      <div class="badge">
-        Igaporã - Bahia
-      </div>
-    </header>
+        <p class="quote">
+          Java, Spring Boot, Kotlin, PHP e bancos relacionais aplicados a sistemas de gestão em saúde.
+        </p>
+      </section>
 
-    <div class="layout">
-      <aside class="sidebar">
-        <section class="section">
-          <h2 class="section-title">Contato</h2>
+      <div class="sidebar-content">
+        <section class="side-section">
+          <h2 class="side-title">Contato</h2>
 
           <div class="contact-list">
             <div class="contact-item">
-              <span class="contact-label">Telefone</span>
+              <div class="contact-icon">☎</div>
               <span>(77) 98126-7515</span>
             </div>
 
             <div class="contact-item">
-              <span class="contact-label">E-mail</span>
-              <a href="mailto:pietrag89@gmail.com">
-                pietrag89@gmail.com
-              </a>
+              <div class="contact-icon">@</div>
+              <a href="mailto:pietrag89@gmail.com">pietrag89@gmail.com</a>
             </div>
 
             <div class="contact-item">
-              <span class="contact-label">LinkedIn</span>
-              <a
-                href="https://www.linkedin.com/in/pietra-macedo-32105a22b/"
-                target="_blank"
-              >
+              <div class="contact-icon">in</div>
+              <a href="https://www.linkedin.com/in/pietra-macedo-32105a22b/" target="_blank">
                 linkedin.com/in/pietra-macedo
               </a>
             </div>
 
             <div class="contact-item">
-              <span class="contact-label">GitHub</span>
-              <a
-                href="https://www.github.com/pietramacedof/"
-                target="_blank"
-              >
+              <div class="contact-icon">GH</div>
+              <a href="https://www.github.com/pietramacedof/" target="_blank">
                 github.com/pietramacedof
               </a>
             </div>
 
             <div class="contact-item">
-              <span class="contact-label">Perfil</span>
-              <span>Brasileira, solteira, 22 anos</span>
+              <div class="contact-icon">⌂</div>
+              <span>Igaporã - Bahia</span>
             </div>
           </div>
         </section>
 
-        <section class="section">
-          <h2 class="section-title">Qualificações</h2>
+        <section class="side-section">
+          <h2 class="side-title">Qualificações</h2>
 
-          <div class="skills">
-            <div class="skill-card">
+          <div class="skills-group">
+            <div class="skill-box">
               <h3>Linguagens & Frameworks</h3>
-              <p>Java, Spring Boot, Kotlin, PHP</p>
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Kotlin</span>
+                <span class="tag">PHP</span>
+              </div>
             </div>
 
-            <div class="skill-card">
+            <div class="skill-box">
               <h3>Banco de Dados</h3>
-              <p>PostgreSQL, SQL Server, MySQL, modelagem relacional e migrações com Flyway</p>
+              <div class="tags">
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">SQL Server</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">Flyway</span>
+              </div>
             </div>
 
-            <div class="skill-card">
+            <div class="skill-box">
               <h3>Qualidade & Ferramentas</h3>
-              <p>JUnit, Swagger/OpenAPI, Git/GitFlow e Docker</p>
+              <div class="tags">
+                <span class="tag">JUnit</span>
+                <span class="tag">Swagger</span>
+                <span class="tag">Git/GitFlow</span>
+                <span class="tag">Docker</span>
+              </div>
             </div>
 
-            <div class="skill-card">
+            <div class="skill-box">
               <h3>Arquitetura & Conceitos</h3>
-              <p>Microsserviços e mensageria (conceitos) e consumo de APIs REST</p>
+              <div class="tags">
+                <span class="tag">Microsserviços</span>
+                <span class="tag">APIs REST</span>
+                <span class="tag">Mensageria</span>
+                <span class="tag">Clean Code</span>
+              </div>
             </div>
 
-            <div class="skill-card">
+            <div class="skill-box">
               <h3>Ferramentas</h3>
-              <p>Jira, Figma e WordPress</p>
+              <div class="tags">
+                <span class="tag">Jira</span>
+                <span class="tag">Figma</span>
+                <span class="tag">WordPress</span>
+              </div>
             </div>
           </div>
         </section>
-      </aside>
+      </div>
+    </aside>
 
-      <section class="main">
-        <section class="section">
-          <h2 class="section-title">Formação</h2>
+    <section class="main">
+      <header class="topbar">
+        <div class="intro">
+          <p class="intro-eyebrow">Currículo profissional</p>
 
-          <div class="education-main">
-            <article class="education-card">
-              <div>
-                <h3>Superior em Análise e Desenvolvimento de Sistemas</h3>
-                <p>Instituto Federal Baiano - Campus Guanambi</p>
+          <p>
+            Desenvolvedora Full Stack Júnior com experiência em sistemas de gestão de saúde,
+            atuação em backend com Java e Spring Boot, bancos relacionais e desenvolvimento
+            de soluções complementares em Kotlin.
+          </p>
+        </div>
+
+        <div class="location-pill">
+          Brasil · Bahia
+        </div>
+      </header>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Formação</h2>
+          <span class="line"></span>
+        </div>
+
+        <div class="education-grid">
+          <article class="education-card">
+            <div>
+              <h3>Superior em Análise e Desenvolvimento de Sistemas</h3>
+              <p>Instituto Federal Baiano - Campus Guanambi</p>
+            </div>
+
+            <span class="year">2025</span>
+          </article>
+
+          <article class="education-card">
+            <div>
+              <h3>Ensino Médio</h3>
+              <p>Colégio Estadual de Igaporã</p>
+            </div>
+
+            <span class="year">2021</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">
+          <h2>Experiência Profissional</h2>
+          <span class="line"></span>
+        </div>
+
+        <div class="experience-list">
+          <article class="experience-card">
+            <div class="experience-header">
+              <div class="company">
+                <h3>Medsoft Tecnologia e Soluções em Saúde</h3>
+                <p>Desenvolvedora Full Stack Júnior</p>
               </div>
 
-              <span>2025</span>
-            </article>
+              <span class="period">01/2026 - Atualmente</span>
+            </div>
 
-            <article class="education-card">
-              <div>
-                <h3>Ensino Médio</h3>
-                <p>Colégio Estadual de Igaporã</p>
+            <ul>
+              <li>
+                Construção, evolução e manutenção de serviços escaláveis para sistemas de gestão de saúde pública utilizando Java e Spring Boot.
+              </li>
+              <li>
+                Criação e otimização de queries em PostgreSQL, atuando com persistência eficiente e manipulação de bancos relacionais.
+              </li>
+              <li>
+                Idealização e desenvolvimento de aplicativo complementar em Kotlin para upload seguro e gerenciamento de imagens de pacientes em processos de auditoria médica.
+              </li>
+              <li>
+                Desenvolvimento e arquitetura de um módulo centralizado de faturamento para unificação das plataformas de saúde (como Cuidar e Recria SUS), estruturando regras de negócio complexas para a geração unificada de guias e arquivos de BPA (Boletim de Produção Ambulatorial) e APAC (Autorização de Procedimentos de Alta Complexidade).
+              </li>
+              <li>
+                Utilização diária de Docker para isolamento de ambientes locais e Git/GitFlow para controle de versão.
+              </li>
+            </ul>
+          </article>
+
+          <article class="experience-card">
+            <div class="experience-header">
+              <div class="company">
+                <h3>Lamparinas Gestão Digital</h3>
+                <p>Desenvolvedora Full Stack Júnior</p>
               </div>
 
-              <span>2021</span>
-            </article>
-          </div>
-        </section>
+              <span class="period">09/2024 - 01/2026</span>
+            </div>
 
-        <section class="section">
-          <h2 class="section-title">Experiência Profissional</h2>
+            <ul>
+              <li>
+                Desenvolvimento de soluções para aplicações web com bancos de dados relacionais, especialmente SQL Server.
+              </li>
+              <li>
+                Manutenção preventiva e correção de bugs em sistemas de gestão.
+              </li>
+              <li>
+                Aplicação de conceitos de Clean Code para melhorar legibilidade, organização e reusabilidade do código.
+              </li>
+              <li>
+                Atuação em times multifuncionais com foco em entrega contínua de valor e refinamento de requisitos.
+              </li>
+            </ul>
+          </article>
 
-          <div class="timeline">
-            <article class="experience">
-              <div class="experience-header">
-                <div>
-                  <h3>Medsoft Tecnologia e Soluções em Saúde</h3>
-                  <p class="role">Desenvolvedora Full Stack Júnior</p>
-                </div>
-
-                <span class="period">01/2026 - Atualmente</span>
+          <article class="experience-card">
+            <div class="experience-header">
+              <div class="company">
+                <h3>Lamparinas Gestão Digital</h3>
+                <p>Desenvolvedora Full Stack Estágio / Trainee</p>
               </div>
 
-              <ul>
-                <li>
-                  Construção, evolução e manutenção de serviços escaláveis para sistemas de gestão de saúde pública utilizando Java e Spring Boot.
-                </li>
-                <li>
-                  Criação e otimização de queries em PostgreSQL, atuando com persistência eficiente e manipulação de bancos relacionais.
-                </li>
-                <li>
-                  Idealização e desenvolvimento de aplicativo complementar em Kotlin para upload seguro e gerenciamento de imagens de pacientes em processos de auditoria médica.
-                </li>
-                <li>
-                  Utilização diária de Docker para isolamento de ambientes locais e Git/GitFlow para controle de versão.
-                </li>
-              </ul>
-            </article>
+              <span class="period">03/2024 - 09/2024</span>
+            </div>
 
-            <article class="experience">
-              <div class="experience-header">
-                <div>
-                  <h3>Lamparinas Gestão Digital</h3>
-                  <p class="role">Desenvolvedora Full Stack Júnior</p>
-                </div>
+            <ul>
+              <li>
+                Atuação no ciclo inicial de desenvolvimento e manutenção de sistemas de gestão de saúde.
+              </li>
+              <li>
+                Desenvolvimento de interfaces responsivas e dinâmicas utilizando PHP, Bootstrap e jQuery.
+              </li>
+              <li>
+                Apoio na prototipação e arquitetura de interfaces focadas em UX/UI utilizando Figma.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
 
-                <span class="period">09/2024 - 01/2026</span>
-              </div>
+      <section class="section">
+        <div class="section-title">
+          <h2>Projeto de Destaque</h2>
+          <span class="line"></span>
+        </div>
 
-              <ul>
-                <li>
-                  Desenvolvimento de soluções para aplicações web com bancos de dados relacionais, especialmente SQL Server.
-                </li>
-                <li>
-                  Consumo de dados via APIs, manutenção preventiva e correção de bugs em sistemas de gestão.
-                </li>
-                <li>
-                  Aplicação de conceitos de Clean Code para melhorar legibilidade, organização e reusabilidade do código.
-                </li>
-                <li>
-                  Atuação em times multifuncionais com foco em entrega contínua de valor e refinamento de requisitos.
-                </li>
-              </ul>
-            </article>
-
-            <article class="experience">
-              <div class="experience-header">
-                <div>
-                  <h3>Lamparinas Gestão Digital</h3>
-                  <p class="role">Desenvolvedora Full Stack Estágio / Trainee</p>
-                </div>
-
-                <span class="period">03/2024 - 09/2024</span>
-              </div>
-
-              <ul>
-                <li>
-                  Atuação no ciclo inicial de desenvolvimento e manutenção de sistemas de gestão de saúde.
-                </li>
-                <li>
-                  Desenvolvimento de interfaces responsivas e dinâmicas utilizando PHP, Bootstrap e jQuery.
-                </li>
-                <li>
-                  Apoio na prototipação e arquitetura de interfaces focadas em UX/UI utilizando Figma.
-                </li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="section">
-          <h2 class="section-title">Projeto de Destaque</h2>
-
-          <article class="project-card">
+        <article class="project-card">
+          <div>
             <h3>Aplicativo de Captura e Upload Seguro de Imagens</h3>
-            <p class="project-stack">Kotlin</p>
+
             <p>
               Desenvolvimento completo de uma solução para captura e upload seguro de imagens,
               com implementação de marcas d'água automatizadas em tempo real e injeção de
               metadados diretamente nos arquivos de imagem.
             </p>
-          </article>
-        </section>
+          </div>
+
+          <span class="project-badge">Kotlin</span>
+        </article>
       </section>
-    </div>
+
+      <footer class="footer">
+        <span>Pietra Geovanna Macedo Ferreira</span>
+      </footer>
+    </section>
   </main>
 </body>
 </html>
